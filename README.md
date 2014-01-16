@@ -1,4 +1,3 @@
-broadtext
-=========
+# Broadtext
 
-Django App to make is easier to broadcast texts
+Making it easy to broadcast texts
