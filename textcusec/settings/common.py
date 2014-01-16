@@ -49,7 +49,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '',
+        'NAME': normpath(join(DJANGO_ROOT, 'textcusec.db')),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -276,5 +276,5 @@ COMPRESS_JS_FILTERS = [
 
 
 ########## IMPORT TWILIO CONF
-from twilio.conf import twilio
+from twilio.conf import TWILIO
 ########## END IMPORT TWILIO CONF
