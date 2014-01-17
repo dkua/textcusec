@@ -202,6 +202,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    "apps.broadtext",
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -276,5 +277,5 @@ COMPRESS_JS_FILTERS = [
 
 
 ########## IMPORT TWILIO CONF
-from twilio.conf import TWILIO
+from twilio import TWILIO_SID, TWILIO_TOKEN
 ########## END IMPORT TWILIO CONF

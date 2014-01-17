@@ -1,2 +1,15 @@
--r reqs/prod.txt
-pylibmc==1.2.3
+Jinja2==2.7.2
+MarkupSafe==0.18
+PyYAML==3.10
+ansible==1.4.4
+ecdsa==0.10
+git-remote-helpers==0.1.0
+httplib2==0.8
+mercurial==2.6.3
+paramiko==1.12.1
+pycrypto==2.6.1
+stevedore==0.10
+virtualenv==1.10
+virtualenv-clone==0.2.4
+virtualenvwrapper==4.1.1
+wsgiref==0.1.2

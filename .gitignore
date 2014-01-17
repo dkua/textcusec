@@ -1,5 +1,7 @@
 *.log
 *.pot
 *.pyc
+*.db
 local_settings.py
-twilio.conf
+twilio.py
+migrations/

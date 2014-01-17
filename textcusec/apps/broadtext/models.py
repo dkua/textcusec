@@ -1,27 +1,37 @@
 from django.db import models
 from twilio.rest import TwilioRestClient
-from settings.common import TWILIO
+from django.conf import settings
+
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     number = models.CharField(max_length=15)
 
+    def __unicode__(self):
+        return u"{0} {1}: {2}".format(self.first_name, self.last_name, self.number)
+
 class Group(models.Model):
     name = models.CharField(max_length=30)
     contacts = models.ManyToManyField("Contact")
 
+    def __unicode__(self):
+        return self.name
+
 class Message(models.Model):
     sender = models.ForeignKey("Sender")
     recipients = models.ManyToManyField("Contact")
-    body = models.CharField(max_length=1600)
+    body = models.CharField(max_length=1600, blank=True)
 
-    def send():
+    def __unicode__(self):
+        return self.body[:50]
+
+    def send(self):
         result = {}
-        client = sender.initiate()
+        client = self.sender.initiate()
         for recipient in self.recipients.all():
             number = recipient.number
-            sms = client.messages.create(to=number, from_=client.number, body=self.body)
+            sms = client.messages.create(to=number, from_=self.sender.number, body=self.body)
             result[number] = {"sid": sms.sid}
         return result
 
@@ -29,7 +39,10 @@ class Sender(models.Model):
     name = models.CharField(max_length=30)
     number = models.CharField(max_length=15)
 
-    def initiate():
-        account = TWILIO.SID
-        token = TWILIO.TOKEN
+    def __unicode__(self):
+        return u"{0}: {1}".format(self.name, self.number)
+
+    def initiate(self):
+        account = settings.TWILIO_SID
+        token = settings.TWILIO_TOKEN
         return TwilioRestClient(account, token)
