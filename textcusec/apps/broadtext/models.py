@@ -36,6 +36,8 @@ class Message(models.Model):
             number = recipient.number
             sms = client.messages.create(to=number, from_=self.sender.number, body=self.body)
             result[number] = {"sid": sms.sid}
+        result_length = "Successfull Texts: {0}".format(len(result))
+        print(result_length)
         return result
 
 class Sender(models.Model):
