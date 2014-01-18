@@ -20,7 +20,8 @@ class Group(models.Model):
 
 class Message(models.Model):
     sender = models.ForeignKey("Sender")
-    recipients = models.ManyToManyField("Contact")
+    contacts = models.ManyToManyField("Contact", blank=True)
+    groups = models.ManyToManyField("Group", blank=True)
     body = models.CharField(max_length=1600, blank=True)
 
     def __unicode__(self):
@@ -29,7 +30,10 @@ class Message(models.Model):
     def send(self):
         result = {}
         client = self.sender.initiate()
-        for recipient in self.recipients.all():
+        recipients = self.contacts.all()
+        for group in self.groups.all():
+            recipients = recipients | group.contacts.all()
+        for recipient in recipients.distinct():
             number = recipient.number
             sms = client.messages.create(to=number, from_=self.sender.number, body=self.body)
             result[number] = {"sid": sms.sid}
