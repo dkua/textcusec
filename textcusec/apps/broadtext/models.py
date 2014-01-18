@@ -4,12 +4,11 @@ from django.conf import settings
 
 
 class Contact(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     number = models.CharField(max_length=15)
 
     def __unicode__(self):
-        return u"{0} {1}: {2}".format(self.first_name, self.last_name, self.number)
+        return u"{0}: {1}".format(self.name, self.number)
 
 class Group(models.Model):
     name = models.CharField(max_length=30)
