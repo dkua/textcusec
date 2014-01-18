@@ -10,6 +10,7 @@ def send_message(modeladmin, request, queryset):
 send_message.short_description = "Send selected messages"
 
 class MessageAdmin(admin.ModelAdmin):
+    list_display = ("body", "recent_successes")
     actions = [send_message,]
 
 

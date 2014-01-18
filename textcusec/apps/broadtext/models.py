@@ -22,6 +22,7 @@ class Message(models.Model):
     contacts = models.ManyToManyField("Contact", blank=True)
     groups = models.ManyToManyField("Group", blank=True)
     body = models.CharField(max_length=1600, blank=True)
+    recent_successes = models.IntegerField(blank=True, null=True, default=0)
 
     def __unicode__(self):
         return self.body[:50]
@@ -36,8 +37,10 @@ class Message(models.Model):
             number = recipient.number
             sms = client.messages.create(to=number, from_=self.sender.number, body=self.body)
             result[number] = {"sid": sms.sid}
-        result_length = "Successfull Texts: {0}".format(len(result))
-        print(result_length)
+        result_length = len(result)
+        self.recent_successes = result_length
+        self.save()
+        print("Successfull Texts: {0}".format(result_length))
         return result
 
 class Sender(models.Model):
