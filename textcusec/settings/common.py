@@ -48,10 +48,10 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'textcusec.db')),
-        'USER': '',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cusec', # Change before actual use
+        'USER': 'admin', # Change before actual use
+        'PASSWORD': 'password', # Change before actual use
         'HOST': '',
         'PORT': '',
     }
